@@ -1,42 +1,104 @@
 * {
     margin: 0;
     padding: 0;
+    overflow-x: hidden;
 }
-
 html, body {
-    overflow: hidden;
-    height: 100%;
-    width: 100%;
-}
-.container-fluid {
-    padding: 0;
-    margin: 0;
-}
-#sidebar-wrapper {
-    padding-left: 3 0px;
     height: 100vh;
-}
-.nav-logo {
-    font-size: 35px;
-}
-.list-group {
-    width: max-content;
+    width: 100vw
 }
 
-#sidebar-wrapper a {
-    font-family: Lato; 
-    font-size: 18px;
-    text-decoration: none;
-}
-#sidebar-wrapper .nav-photography {
-    font-size: 24px;
+.active {
+    font-weight: bolder;
+    background-color: white !important;
+    color: #212529 !important;
+    border-color: rgba(0, 0, 0, 0) !important;
 }
 
+.nav-tabs li button:hover {
+    border-color:  rgba(0, 0, 0, 0) !important;   
+}
+
+.side-navbar {
+    border-right: 1px solid #b9b9b9;
+}
+.nav-logo-name {
+    display: block;
+}
 
 
+.home-page .title {
+    font-family: 'Lora', serif;
+    padding: 30px 15px 40px 15px;
+    line-height: normal;
+}
+
+.animate-current-page {
+    animation: fadeIn .5s linear;
+}
+
+@media screen and (max-width: 768px) {
+    .hamburger {
+        position: absolute;
+        top: 5%;
+        left: 5%;
+        z-index: 3;
+        cursor: pointer;
+    }
+    .line {
+        width: 30px;
+        height: 3px;
+        background: lightskyblue;
+        margin: 5px;
+    }
+
+    .side-navbar {
+        position: absolute;
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        z-index: 2;
+        height: 100vh;
+        width: 60%;
+        background: white;
+        padding: 50px 0px 0px 0px !important;
+        transform: translateX(-120%);
+        transition: transform 0.5s ease-in;
+    }
+    .side-navbar .nav-tabs li{
+        opacity: 0;
+    }
+    .nav-logo-name {
+        display: none;
+    }
 
 
+    .nav-tabs .nav-item {
+        margin-top: 40px;
+    }
+    .nav-tabs .nav-item button {
+        font-size: 30px;
+    }
+    .tab-content {
+        z-index: 1;
+    }
 
+    .tab-pane {
+        padding: 0 !important;
+    }
+}
 
+.nav-active {
+    transform: translateX(0);
+}
 
-/* background-image: url(photos/website-home-photo-lake-stars.jpg); */
+@keyframes navLinkFade {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0px);
+    }
+}
