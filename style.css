@@ -20,6 +20,7 @@ html, body {
 }
 
 .side-navbar {
+    z-index: 5;
     border-right: 1px solid #b9b9b9;
 }
 .nav-logo-name {
@@ -42,7 +43,7 @@ html, body {
         position: absolute;
         top: 5%;
         left: 5%;
-        z-index: 3;
+        z-index: 10;
         cursor: pointer;
     }
     .line {
@@ -58,7 +59,7 @@ html, body {
         display: flex;
         justify-content: start;
         align-items: center;
-        z-index: 2;
+        z-index: -1;
         height: 100vh;
         width: 50%;
         background: white;
@@ -87,9 +88,18 @@ html, body {
     .tab-pane {
         padding: 0 !important;
     }
+
+
+    .carousel-container {
+        margin: 0 auto;
+        width: 110% !important;
+        height: 500px;
+        overflow: hidden;
+    }
 }
 
 .nav-active {
+    z-index: 5;
     transform: translateX(0);
 }
 
@@ -135,20 +145,6 @@ html, body {
         opacity: 1;
     }
 }
-
-/* @keyframse burgerAnimateClose {
-    0% {
-        opactiy: 1;
-        transform: translate(0px);
-    }
-    10% {
-        opacity: 0;
-        transform: translate(0px);
-    }
-    100% {
-        opacity: 1;
-    }
-} */
 
 
 .blur-background {
