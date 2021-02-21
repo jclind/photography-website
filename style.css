@@ -50,6 +50,7 @@ html, body {
         height: 3px;
         background: lightskyblue;
         margin: 5px;
+        transition: all .5s ease 0.5s;
     }
 
     .side-navbar {
@@ -59,7 +60,7 @@ html, body {
         align-items: center;
         z-index: 2;
         height: 100vh;
-        width: 60%;
+        width: 50%;
         background: white;
         padding: 50px 0px 0px 0px !important;
         transform: translateX(-120%);
@@ -100,5 +101,66 @@ html, body {
     to {
         opacity: 1;
         transform: translateX(0px);
+    }
+}
+
+.toggle-burger .line1 {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+.toggle-burger .line2 {
+    opacity: 0;
+}
+.toggle-burger .line3 {
+    transform: rotate(45deg) translate(-5px, -6px);   
+}
+
+.burger-animation {
+    animation: burgerAnimateOpen 1.8s ease;
+}
+
+@keyframes burgerAnimateOpen {
+    0% {
+        opacity: 1;
+        transform: translate(0px);
+    }
+    10% {
+        opacity: 0;
+        transform: translate(0px);
+    }
+    15% {
+        opacity: 0;
+        transform: translate(-50px)
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* @keyframse burgerAnimateClose {
+    0% {
+        opactiy: 1;
+        transform: translate(0px);
+    }
+    10% {
+        opacity: 0;
+        transform: translate(0px);
+    }
+    100% {
+        opacity: 1;
+    }
+} */
+
+
+.blur-background {
+   filter: brightness(50%);
+   animation: blurBackground 1s ease;
+}
+
+@keyframes blurBackground {
+    to {
+        filter: brightness(50%);
+    }
+    from {
+        filter: brightness(100%);
     }
 }
