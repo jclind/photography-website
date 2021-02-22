@@ -156,7 +156,6 @@ html, body {
     }
 }
 
-
 .blur-background {
    filter: brightness(50%);
    animation: blurBackground 1s ease;
@@ -172,6 +171,57 @@ html, body {
 }
 
 
+.tab-content .tab-pane {
+    padding-left: 180px;
+}
+
+
+.collections-selector-content img {
+    filter: brightness(65%);
+    transition: all 1s ease;
+    overflow: hidden;
+    cursor: pointer;
+    z-index: 4;
+}
+.collections-title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Lora', serif;
+    font-size: 70px;
+    color: white;
+    text-shadow: 0 1px 0 rgb(75, 75, 75);
+    cursor: pointer;
+    z-index: 5;
+}
+
+.collections-selector-content img:hover {
+    filter: brightness(100%);
+    transform: scale(1.05);
+}
+
+.collections-selector-content .collections-title:hover + img {
+    filter: brightness(100%);
+    transform: scale(1.05);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Mobile Selectors */
 
 .mobile-home {
     margin: 0 auto;
