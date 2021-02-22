@@ -59,15 +59,17 @@ navSlide()
 
 
 const changeHomeImages = () => {
-    const homeImages = document.getElementById('homeImages')
+    const homeImages = document.getElementById('home')
     if ($(window).width() <= 768) {
         homeImages.innerHTML = `
-            <div class="m-auto" style="width: 98%;">
-                <img src="photos/niagra-boat.jpg" alt="Niagra Falls Boat" class="img-fluid">
+            <div class="mobile-home position-relative">
+                <img src="photos/niagra-boat.jpg" alt="Niagra Falls Boat" class="mobile-home-img img-fluid">
+                <div class="mobile-home-text">
+                    <div style="font-size: 60px; font-weight: bold;">Jesse Lind</div>
+                    <div style="font-size: 40px; font-weight: bold;">Photography</div>
+                </div>
             </div>
         `
     }
 }
 changeHomeImages()
-
-// $(window).
