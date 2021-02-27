@@ -20,10 +20,6 @@
             <div class="line line2"></div>
             <div class="line line3"></div>
         </div>
-        <div class="mobile-header-logo text-center mt-1 d-none">
-            <div style="font-size: 25px">光</div>
-            <div style="font-size: 15px;">Jesse Lind</div>
-        </div>
         <div class="side-navbar nav flex-column position-absolute h-100 pe-4">
             <div class="nav-logo-name pb-2 px-3">
                 <div class="text d-inline-block lh-sm">
@@ -54,65 +50,39 @@
 
         <div class="tab-content d-flex w-100 h-100">
             <div class="tab-pane fade w-100 h-100" id="home" role="tabpanel" aria-labelledby="home-tab">
-                <div class="home-title text-center my-sm-5 my-xxl-4">
-                    <span style="font-size: 40px; font-weight: 500;">Jesse Lind</span><br>
-                    <span class="text-muted sh" style="font-size: 25px; font-weight: 500;">Photography</span>
-                </div>
-                <div class="carousel-container m-auto col-sm-12 col-md-10 col-xxl-7">
-                    <div id="home-carousel" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                            <img src="https://cdn.tookapic.com/photos/2016/115/5/a/5a8bfc724ee22fb2a3bdfa5a028235f6.jpg?q=90&sharp=3&w=770&s=52c9725f1d3ef629476d97d5680c17f4" class="d-block w-100" alt="...">
-                            </div>
-                            <div class="carousel-item">
-                            <img src="https://cdn.tookapic.com/photos/2016/71/2/2/2217da22950630e86eb659644f7dfdcc.jpg?q=90&sharp=3&w=770&s=59ce9b88d53c59715043190dac522273" class="d-block w-100" alt="...">
-                            </div>
-                            <div class="carousel-item">
-                            <img src="https://cdn.tookapic.com/photos/2016/106/3/c/3ccbb9d83de04ea5b78b5576dbfc3806.jpg?q=90&sharp=3&w=770&s=dd99e65c471c8a89e750b4d51338dd2d" class="d-block w-100" alt="...">
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
             <div class="tab-pane fade show active w-100 h-100" id="collections" role="tabpanel" aria-labelledby="collections-tab">
-                <div class="container collections-options mt-5">
-                    <div class="row justify-content-around">
-                        <div class="collections-selector col-md-6 my-3">
-                            <div class="collections-selector-content d-block w-100 position-relative text-center overflow-hidden rounded" id="animal-collection">
-                                <div class="collections-title">ANIMALS</div>
-                                <img src="photos/cold-bird.jpg" alt="" class="img-fluid rounded">
+                <div class="mobile-header-logo text-center mt-1 d-none">
+                    <div style="font-size: 25px">光</div>
+                    <div style="font-size: 15px;">Jesse Lind</div>
+                </div>
+                <div id="collections-body">
+                    <div class="collections-album-title text-center my-3">LOREM PHOTOS</div>
+                    <div class="collections-photo-container">
+                        <div class="row">
+                            <div class="column"> 
+                                <img src="https://cdn.tookapic.com/photos/2017/18/8/8/88397d9a0c2003de84c066c6b5f2bc82.jpg?q=90&sharp=3&w=770&s=e743ec3326a28e8bf1b8b6c2778b9284" alt="" style="width: 100%;">
                             </div>
-                        </div>
-                        <div class="collections-selector col-md-6 my-3">
-                            <div class="collections-selector-content d-block w-100 position-relative text-center overflow-hidden rounded" id="place-collection">
-                                <div class="collections-title">PLACES</div>
-                                <img src="photos/rome-staircase.jpg" alt="" class="img-fluid rounded">
+                                <div class="column">
+                                <img src="https://cdn.tookapic.com/photos/2017/23/6/2/628b607496a26c4a8d07b6e65e0db125.jpg?q=90&sharp=3&w=770&s=148358b2708f01d8001d1217036468cb" alt="" style="width: 100%;">
                             </div>
+                            <div class="column"> 
+                                <img src="https://cdn.tookapic.com/photos/2017/42/1/1/1101e78175539ed6bca7d31551d757d4.jpg?q=90&sharp=3&w=770&s=0e24f5c9c9c46f4af2a52e48166bdae1" alt="" style="width: 100%;">
+                            </div> 
                         </div>
-                        <div class="collections-selector col-md-6 my-3">
-                            <div class="collections-selector-content d-block w-100 position-relative text-center overflow-hidden rounded" id="landscape-collection">
-                                <div class="collections-title">LANDSCAPES</div>
-                                <img src="photos/swiss-mountains.jpg" alt="" class="img-fluid rounded">
-                            </div>
-                        </div>
-                        <div class="collections-selector col-md-6 my-3">
-                            <div class="collections-selector-content d-block w-100 position-relative text-center overflow-hidden rounded" id="studio-collection">
-                                <div class="collections-title">STUDIO</div>
-                                <img src="photos/cold-bird.jpg" alt="" class="img-fluid rounded">
-                            </div>
-                        </div>
-
                     </div>
                 </div>
-            
             </div>
             <div class="tab-pane fade" id="all" role="tabpanel" aria-labelledby="all-tab">Are</div>
             <div class="tab-pane fade" id="about" role="tabpanel" aria-labelledby="about-tab">You</div>
             <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">Doing?</div>
         </div>
-        
+    </div>
+
+    <div class="test" id="test">
 
     </div>
+
     <script src="main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
     <script>
