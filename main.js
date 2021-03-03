@@ -1,3 +1,5 @@
+
+
 // [{src: ..., tag}]
 let allPhotos = [{src: "https://tookapic.ams3.digitaloceanspaces.com/photos/2016/115/5/a/5a8bfc724ee22fb2a3bdfa5a028235f6.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=FCTSGY53G7RK6CW6I4PK%2F20210226%2Fams3%2Fs3%2Faws4_request&X-Amz-Date=20210226T174805Z&X-Amz-SignedHeaders=host&X-Amz-Expires=300&X-Amz-Signature=6ef46d19c2c640f9ea828af6f927cbc97ef5690a4f4acdb3b3d541264be2373d"}]
 
@@ -106,7 +108,11 @@ const changeHomeImages = () => {
         `
     }
 }
+
 const collectionFunctions = () => {
+
+    const collectionsPage = document.getElementById('collections-body')
+    
     const collectionsPhotoGrid = () => {
         let elements = document.getElementsByClassName("column")
         const one = () => {
@@ -121,16 +127,8 @@ const collectionFunctions = () => {
                 elements[i].style.flex = "50%"
             }
         }
-        const three = () => {
-            console.log(elements)
-            for (let i = 0; i < elements.length; i++) {
-                elements[i].style.flex = "33.33333333%"
-            }
-        }
         const changeFlex = () => {
-            if ($(window).width() > 1200 && elements[0].style.flex !="33.33333333%") {
-                three()
-            } else if ($(window).width() < 1200 && $(window).width() > 760 && elements[0].style.flex != "50%") {
+            if ($(window).width() > 1200 && elements[0].style.flex != "50%") {
                 two()
             } else if (elements[0].style.flex != "100%") {
                 one()
@@ -146,56 +144,124 @@ const collectionFunctions = () => {
     }
 
 
+    function showCollectionsBtnPage() {
+        // Show collections buttons html
+        
+        collectionsPage.innerHTML = `
+            <div class="container collections-options mt-1">
+                <div class="row justify-content-around">
+                    <div class="collections-selector col-lg-6 my-3">
+                        <div class="collections-selector-content d-block w-100 position-relative text-center overflow-hidden rounded" id="animals">
+                            <div class="collections-title">ANIMALS</div>
+                            <img alt="" class="img-fluid rounded">
+                        </div>
+                    </div>
+                    <div class="collections-selector col-lg-6 my-3">
+                        <div class="collections-selector-content d-block w-100 position-relative text-center overflow-hidden rounded" id="places">
+                            <div class="collections-title">PLACES</div>
+                            <img alt="" class="img-fluid rounded">
+                        </div>
+                    </div>
+                    <div class="collections-selector col-lg-6 my-3">
+                        <div class="collections-selector-content d-block w-100 position-relative text-center overflow-hidden rounded" id="landscapes">
+                            <div class="collections-title">LANDSCAPES</div>
+                            <img alt="" class="img-fluid rounded">
+                        </div>
+                    </div>
+                    <div class="collections-selector col-lg-6 my-3">
+                        <div class="collections-selector-content d-block w-100 position-relative text-center overflow-hidden rounded" id="studio">
+                            <div class="collections-title">STUDIO</div>
+                            <img alt="" class="img-fluid rounded">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `
+        // Get collections thumbnail image references for each category
+        const collectionsBtnPageRef = firebase.storage().ref('photos/thumbnails/collections')
+        const animalsCollectionsBtn = collectionsBtnPageRef.child('animals.jpg')
+        const landscapesCollectionsBtn = collectionsBtnPageRef.child('landscapes.jpg')
+        const placesCollectionsBtn = collectionsBtnPageRef.child('places.jpg')
+        const studioCollectionsBtn = collectionsBtnPageRef.child('studio.jpg')
 
-    const collectionsPage = document.getElementById('collections-body')
-
-    // Show collections buttons html
-    // collectionsPage.innerHTML = `
-    //     <div class="container collections-options mt-1">
-    //         <div class="row justify-content-around">
-    //             <div class="collections-selector col-lg-6 my-3">
-    //                 <div class="collections-selector-content d-block w-100 position-relative text-center overflow-hidden rounded" id="animal">
-    //                     <div class="collections-title">ANIMALS</div>
-    //                     <img src="photos/cold-bird.jpg" alt="" class="img-fluid rounded">
-    //                 </div>
-    //             </div>
-    //             <div class="collections-selector col-lg-6 my-3">
-    //                 <div class="collections-selector-content d-block w-100 position-relative text-center overflow-hidden rounded" id="place">
-    //                     <div class="collections-title">PLACES</div>
-    //                     <img src="photos/rome-staircase.jpg" alt="" class="img-fluid rounded">
-    //                 </div>
-    //             </div>
-    //             <div class="collections-selector col-lg-6 my-3">
-    //                 <div class="collections-selector-content d-block w-100 position-relative text-center overflow-hidden rounded" id="landscape">
-    //                     <div class="collections-title">LANDSCAPES</div>
-    //                     <img src="photos/swiss-mountains.jpg" alt="" class="img-fluid rounded">
-    //                 </div>
-    //             </div>
-    //             <div class="collections-selector col-lg-6 my-3">
-    //                 <div class="collections-selector-content d-block w-100 position-relative text-center overflow-hidden rounded" id="studio">
-    //                     <div class="collections-title">STUDIO</div>
-    //                     <img src="photos/green-water-drops.jpg" alt="" class="img-fluid rounded">
-    //                 </div>
-    //             </div>
-    //         </div>
-    //     </div>
-    // `
-
-    let collectionBtns = document.querySelectorAll('.collections-selector-content')
-
-    // Add click event listeners to all collections buttons
-    collectionBtns.forEach(function(item) {
-        item.addEventListener('click', function(event) {
-            const currCollectionId = this.id
-            console.log(currCollectionId)
-
-            // collectionsPage.innerHTML = `
-            //     <div>LOREM!</div>
-            // `
-
+        // Download and show images in the collecitons tab thumbnails
+        animalsCollectionsBtn.getDownloadURL()
+        .then((url) => {
+            document.querySelector('#animals img').src = url
         })
-    })
-    collectionsPhotoGrid();
+        landscapesCollectionsBtn.getDownloadURL()
+        .then((url) => {
+            document.querySelector('#landscapes img').src = url
+        })
+        placesCollectionsBtn.getDownloadURL()
+        .then((url) => {
+            document.querySelector('#places img').src = url
+        })
+        studioCollectionsBtn.getDownloadURL()
+        .then((url) => {
+            document.querySelector('#studio img').src = url
+        })
+
+        // Add click event listeners to all collections buttons
+        let collectionBtns = document.querySelectorAll('.collections-selector-content')
+        collectionBtns.forEach(function(item) {
+            item.addEventListener('click', function(event) {
+                const currCollectionId = this.id
+                console.log(currCollectionId)
+    
+                showCollection(currCollectionId)
+            })
+        })
+
+    }
+
+    function showCollection(subject) {
+        const title = subject.toUpperCase();
+        collectionsPage.innerHTML = `
+            <span id="return-to-collections-btns" class="my-3 text-muted">&#8592;</span>
+            <div class="collections-album-title text-center my-3">${title}</div>
+            <div class="collections-photo-container">
+                <div class="row">
+                    <div class="column" id="collections-column-1"> 
+                    </div>
+                    <div class="column" id="collections-column-2"> 
+                    </div>
+                </div>
+            </div>
+        `
+
+        // Initialize reference to photo columns and photo refs.
+        const column1 = document.querySelector('#collections-column-1')
+        const column2 = document.querySelector('#collections-column-2')
+        const storageRef = firebase.storage().ref('photos/collections/' + subject)
+
+        storageRef.listAll().then(function(result) {
+            result.items.forEach(function(imageRef, index) {
+                imageRef.getDownloadURL()
+                .then((url) => {
+                    if (index % 2 == 0) {
+                        column1.innerHTML += `
+                            <img src="${url}" alt="" style="width: 100%;">
+                        `
+                    } else {
+                        column2.innerHTML += `
+                            <img src="${url}" alt="" style="width: 100%;">
+                        `
+                    }
+                })
+            })
+        })
+
+        // Control back to collections page button
+        document.getElementById('return-to-collections-btns').addEventListener('click', () => {
+            showCollectionsBtnPage()
+        })
+
+        collectionsPhotoGrid()
+    }
+
+
+    showCollectionsBtnPage()
 }
 
 
@@ -219,20 +285,9 @@ const main = () => {
 }
 main()
 
-let testVal
-const test1 = () => {
-    function bingus() {
-        testVal = false;
-        console.log(inc)
-    }
 
-    let html = document.getElementById('test').innerHTML
-    let inc = 1;
-    testVal = true;
-    while (testVal) {
-        html += `
-            <img src="photos/animals/${inc}.jpg" onError="bingus()">
-        `
-        inc++
-    }
-}
+
+
+
+
+

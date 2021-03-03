@@ -217,6 +217,19 @@ html, body {
 
 
 /* Collections photos */
+#return-to-collections-btns {
+    position: absolute;
+    left: 15%;
+    font-weight: lighter;
+    font-size: 45px;
+    cursor: pointer;
+}
+#return-to-collections-btns:hover {
+    color: black !important;
+}
+
+
+
 
 .collections-album-title {
     font-size: 50px;
@@ -247,7 +260,6 @@ html, body {
     margin-top: 8px;
     vertical-align: middle;
 }
-
 
 
 
