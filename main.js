@@ -145,10 +145,18 @@ const collectionFunctions = () => {
 
 
     function showCollectionsBtnPage() {
+        // Show loading icon when returning or going to the collections buttons page
+        // $(".loader-wrapper").style.display = 'flex'
+
+
         // Show collections buttons html
-        
         collectionsPage.innerHTML = `
-            <div class="container collections-options mt-1">
+            <div class="loader-wrapper">
+                <span class="loader">
+                    <span class="loader-inner"></span>
+                </span>
+            </div>
+            <div class="container collections-options mt-1 mb-5">
                 <div class="row justify-content-around">
                     <div class="collections-selector col-lg-6 my-3">
                         <div class="collections-selector-content d-block w-100 position-relative text-center overflow-hidden rounded" id="animals">
@@ -201,6 +209,9 @@ const collectionFunctions = () => {
         .then((url) => {
             document.querySelector('#studio img').src = url
         })
+        $('#studio img').on("load", function() {
+            $(".loader-wrapper").fadeOut("slow")
+        }) 
 
         // Add click event listeners to all collections buttons
         let collectionBtns = document.querySelectorAll('.collections-selector-content')
@@ -241,11 +252,11 @@ const collectionFunctions = () => {
                 .then((url) => {
                     if (index % 2 == 0) {
                         column1.innerHTML += `
-                            <img src="${url}" alt="" style="width: 100%;">
+                            <img src="${url}" alt="" style="width: 100%;" id="${subject}-img">
                         `
                     } else {
                         column2.innerHTML += `
-                            <img src="${url}" alt="" style="width: 100%;">
+                            <img src="${url}" alt="" style="width: 100%;" id="${subject}-img">
                         `
                     }
                 })
@@ -284,10 +295,6 @@ const main = () => {
     collectionFunctions()
 }
 main()
-
-
-
-
 
 
 

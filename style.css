@@ -20,7 +20,7 @@ html, body {
 }
 
 .side-navbar {
-    z-index: 5;
+    z-index: 10;
     border-right: 1px solid #b9b9b9;
 }
 .nav-logo-name {
@@ -260,6 +260,70 @@ html, body {
     margin-top: 8px;
     vertical-align: middle;
 }
+
+
+
+
+
+
+
+
+
+
+/* Loader CSS */
+.loader-wrapper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: white;
+    z-index: 6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 80px;
+    padding-left: 180px;
+}
+
+@media screen and (max-width: 768px) {
+    .loader-wrapper {
+        padding-left: 0px;
+    }
+}
+
+.loader {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    position: relative;
+    border: 2px solid rgb(82, 82, 82);
+    animation: loader 2s infinite ease;
+}
+.loader-inner {
+    vertical-align: top;
+    display: inline-block;
+    width: 100%;
+    background-image: linear-gradient(to bottom right, #22c1c3, #fdbb2d);
+    animation: loader-inner 2s infinite ease-in;
+}
+
+@keyframes loader {
+    0% { transform: rotate(0deg);}
+    25% { transform: rotate(180deg);}
+    50% { transform: rotate(180deg);}
+    75% { transform: rotate(360deg);}
+    100% { transform: rotate(360deg);}
+}
+@keyframes loader-inner {
+    0% { height: 0%;}
+    25% { height: 0%;}
+    50% { height: 100%;}
+    75% { height: 100%;}
+    100% { height: 0%;}
+}
+
+
 
 
 
