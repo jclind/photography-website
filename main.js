@@ -10,12 +10,6 @@ let allPhotos = [{src: "https://tookapic.ams3.digitaloceanspaces.com/photos/2016
 
 
 
-
-
-
-
-
-
 const navSlide = () => {
     const burger = document.querySelector('.hamburger')
     const nav = document.querySelector('.side-navbar')
@@ -145,10 +139,6 @@ const collectionFunctions = () => {
 
 
     function showCollectionsBtnPage() {
-        // Show loading icon when returning or going to the collections buttons page
-        // $(".loader-wrapper").style.display = 'flex'
-
-
         // Show collections buttons html
         collectionsPage.innerHTML = `
             <div class="loader-wrapper">
@@ -226,16 +216,26 @@ const collectionFunctions = () => {
 
     }
 
+    const collectionsNavBtn = document.getElementById('collections-tab')
+    $(collectionsNavBtn).on('click', function() {
+        showCollectionsBtnPage()
+    })
+
     function showCollection(subject) {
         const title = subject.toUpperCase();
         collectionsPage.innerHTML = `
-            <span id="return-to-collections-btns" class="my-3 text-muted">&#8592;</span>
-            <div class="collections-album-title text-center my-3">${title}</div>
+            <div class="position-relative">
+                <div id="return-to-collections-btns" class="my-3 text-muted position-absolute d-flex flex-column">
+                    <div class="overflow-hidden" id="return-arrow">&#8592;</div>
+                    <div style="font-size: 14px;" id="return-text">collections</div>
+                </div>
+                <div class="collections-album-title text-center my-3 mx-auto">${title}</div>
+            </div>
             <div class="collections-photo-container">
                 <div class="row">
                     <div class="column" id="collections-column-1"> 
                     </div>
-                    <div class="column" id="collections-column-2"> 
+                    <div class="column" id="collections-column-2">
                     </div>
                 </div>
             </div>
@@ -247,19 +247,24 @@ const collectionFunctions = () => {
         const storageRef = firebase.storage().ref('photos/collections/' + subject)
 
         storageRef.listAll().then(function(result) {
+            let testArr = []
             result.items.forEach(function(imageRef, index) {
-                imageRef.getDownloadURL()
-                .then((url) => {
+                let promise = imageRef.getDownloadURL().then((url) => {
                     if (index % 2 == 0) {
                         column1.innerHTML += `
-                            <img src="${url}" alt="" style="width: 100%;" id="${subject}-img">
+                            <img src="${url}" alt="" class="collection-image ${subject}-img" style="width: 100%;" id="${subject}-img-${index}">
                         `
                     } else {
                         column2.innerHTML += `
-                            <img src="${url}" alt="" style="width: 100%;" id="${subject}-img">
+                            <img src="${url}" alt="" class="collection-image ${subject}-img" style="width: 100%;" id="${subject}-img-${index}">
                         `
                     }
                 })
+                testArr.push(promise)
+            })
+            Promise.all(testArr).then(() => {
+                let els = document.querySelectorAll('.collection-image')
+                console.log(els)
             })
         })
 
@@ -269,6 +274,18 @@ const collectionFunctions = () => {
         })
 
         collectionsPhotoGrid()
+        // showCollectionsImageCarousel()
+    }
+
+    function showCollectionsImageCarousel() {
+        // const collectionsCarouselBody = document.getElementById('collections-carousel-container')
+        console.log('hello there')
+        // console.log(collectionImages)
+        // Array.prototype.forEach.call(collectionImages, function(item) {
+        //     item.addEventListener('click', function() {
+        //         console.log('yo')
+        //     })
+        // })
     }
 
 

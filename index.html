@@ -20,6 +20,7 @@
             <div class="line line2"></div>
             <div class="line line3"></div>
         </div>
+
         <div class="side-navbar nav flex-column position-absolute h-100 pe-4">
             <div class="nav-logo-name pb-2 px-3">
                 <div class="text d-inline-block lh-sm">
@@ -51,12 +52,35 @@
         <div class="tab-content d-flex w-100 h-100 overflow-hidden">
             <div class="tab-pane fade w-100 h-100 overflow-hidden" id="home" role="tabpanel" aria-labelledby="home-tab">
             </div>
-            <div class="tab-pane fade show active w-100 h-100 overflow-hidden" id="collections" role="tabpanel" aria-labelledby="collections-tab">
+            <div class="tab-pane fade show active w-100 h-100 overflow-hidden" id="collections" role="tabpanel" aria-labelledby="collections-tab">                
                 <div class="mobile-header-logo text-center mt-1 d-none">
                     <div style="font-size: 25px">光</div>
                     <div style="font-size: 15px;">Jesse Lind</div>
                 </div>
                 <div id="collections-body" class="overflow-hidden">
+                </div>
+                <div id="collections-carousel-container" class="collections-carousel-wrapper position-absolute d-flex justify-content-center align-items-center d-none">
+                    <div id="exit-collections-carousel-btn">&#10005</div>
+                    <div class="collections-carousel d-flex justify-content-center align-items-center">
+                        <div id="collections-carousel-controls" class="carousel slide overflow-hidden" data-ride="carousel" data-interval="false">
+                            <div class="carousel-inner">
+                                <div class="collections-carousel-item carousel-item">
+                                    <img src="https://cdn.pixabay.com/photo/2014/02/27/16/10/tree-276014__340.jpg" class="d-block" alt="">
+                                </div>
+                                <div class="collections-carousel-item carousel-item active">
+                                    <img src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxleHBsb3JlLWZlZWR8M3x8fGVufDB8fHw%3D&w=1000&q=80" class="d-block" alt="">
+                                </div>
+                            </div>
+                            <button class="collections-carousel-prev-btn carousel-control-prev" type="button" data-bs-target="#collections-carousel-controls" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="collections-carousel-next-btn carousel-control-next" type="button" data-bs-target="#collections-carousel-controls" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
                 </div>
                 
             </div>
@@ -65,6 +89,9 @@
             <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">Doing?</div>
         </div>
     </div>
+
+
+    <div class="bottom-bar d-none"></div>
 
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
