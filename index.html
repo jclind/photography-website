@@ -52,7 +52,7 @@
         <div class="tab-content d-flex w-100 h-100 overflow-hidden">
             <div class="tab-pane fade w-100 h-100 overflow-hidden" id="home" role="tabpanel" aria-labelledby="home-tab">
             </div>
-            <div class="tab-pane fade show active w-100 h-100 overflow-hidden" id="collections" role="tabpanel" aria-labelledby="collections-tab">                
+            <div class="tab-pane fade w-100 h-100 overflow-hidden" id="collections" role="tabpanel" aria-labelledby="collections-tab">                
                 <div class="mobile-header-logo text-center mt-1 d-none">
                     <div style="font-size: 25px">光</div>
                     <div style="font-size: 15px;">Jesse Lind</div>
@@ -66,11 +66,11 @@
                             <div class="carousel-inner">
                             </div>
                             <button class="collections-carousel-prev-btn carousel-control-prev" type="button" data-bs-target="#collections-carousel-controls" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="carousel-control-prev-icon" id="collections-carousel-prev-icon" aria-hidden="true"></span>
                                 <span class="visually-hidden">Previous</span>
                             </button>
                             <button class="collections-carousel-next-btn carousel-control-next" type="button" data-bs-target="#collections-carousel-controls" data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="carousel-control-next-icon" id="collections-carousel-next-icon" aria-hidden="true"></span>
                                 <span class="visually-hidden">Next</span>
                             </button>
                         </div>
@@ -78,7 +78,22 @@
                 </div>
                 
             </div>
-            <div class="tab-pane fade" id="all" role="tabpanel" aria-labelledby="all-tab">Are</div>
+            <div class="tab-pane fade show active w-100 h-100 overflow-hidden" id="all" role="tabpanel" aria-labelledby="all-tab">
+                <div class="mobile-header-logo text-center mt-1 d-none">
+                    <div style="font-size: 25px">光</div>
+                    <div style="font-size: 15px;">Jesse Lind</div>
+                </div>
+                <div class="position-relative">
+                </div>
+                <div class="photo-container">
+                    <div class="row">
+                        <div class="column" id="all-photos-column-1"> 
+                        </div>
+                        <div class="column" id="all-photos-column-2">
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="tab-pane fade" id="about" role="tabpanel" aria-labelledby="about-tab">You</div>
             <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">Doing?</div>
         </div>

@@ -61,6 +61,36 @@ const navSlide = () => {
     }))
 }
 
+const photoGrid = () => {
+    let elements = document.getElementsByClassName("column")
+    const one = () => {
+        console.log(elements)
+        for (let i = 0; i < elements.length; i++) {
+            elements[i].style.flex = "100%"
+        }
+    }
+    const two = () => {
+        console.log(elements)
+        for (let i = 0; i < elements.length; i++) {
+            elements[i].style.flex = "50%"
+        }
+    }
+    const changeFlex = () => {
+        if ($(window).width() > 1200 && elements[0].style.flex != "50%") {
+            two()
+        } else if (elements[0].style.flex != "100%") {
+            one()
+        }
+    }
+
+    $(window).ready(() => {
+        changeFlex();
+    })
+    $(window).on('resize', function() {
+        changeFlex();
+    })
+}
+
 
 const changeHomeImages = () => {
     const homeImages = document.getElementById('home')
@@ -106,36 +136,6 @@ const changeHomeImages = () => {
 const collectionFunctions = () => {
 
     const collectionsPage = document.getElementById('collections-body')
-    
-    const collectionsPhotoGrid = () => {
-        let elements = document.getElementsByClassName("column")
-        const one = () => {
-            console.log(elements)
-            for (let i = 0; i < elements.length; i++) {
-                elements[i].style.flex = "100%"
-            }
-        }
-        const two = () => {
-            console.log(elements)
-            for (let i = 0; i < elements.length; i++) {
-                elements[i].style.flex = "50%"
-            }
-        }
-        const changeFlex = () => {
-            if ($(window).width() > 1200 && elements[0].style.flex != "50%") {
-                two()
-            } else if (elements[0].style.flex != "100%") {
-                one()
-            }
-        }
-
-        $(window).ready(() => {
-            changeFlex();
-        })
-        $(window).on('resize', function() {
-            changeFlex();
-        })
-    }
 
 
     function showCollectionsBtnPage() {
@@ -231,7 +231,7 @@ const collectionFunctions = () => {
                 </div>
                 <div class="collections-album-title text-center my-3 mx-auto">${title}</div>
             </div>
-            <div class="collections-photo-container">
+            <div class="photo-container">
                 <div class="row">
                     <div class="column" id="collections-column-1"> 
                     </div>
@@ -279,7 +279,7 @@ const collectionFunctions = () => {
             showCollectionsBtnPage()
         })
 
-        collectionsPhotoGrid()
+        photoGrid()
     }
 
     function showCollectionsImageCarousel(imgId) {
@@ -323,13 +323,67 @@ const collectionFunctions = () => {
             if (e.key === "Escape" && !collectionsCarouselContainer.classList.contains('d-none')) {
                 collectionsCarouselContainer.classList.add('d-none')
             }
-        });
+        })
+        // Listen for arrow key presses when collectionsCarouselContainer is open to switch between photos.
+        $(document).keyup(function(e) {
+            const prevPhotoBtn = document.getElementById('collections-carousel-prev-icon')
+            const nextPhotoBtn = document.getElementById('collections-carousel-next-icon')
+            if (e.key === "ArrowLeft" && !collectionsCarouselContainer.classList.contains('d-none')) {
+                prevPhotoBtn.click()
+            }
+            if (e.key === "ArrowRight" && !collectionsCarouselContainer.classList.contains('d-none')) {
+                nextPhotoBtn.click()
+            }
+        })
        
     }
 
     showCollectionsBtnPage()
 }
 
+const allPhotosFunctions = () => {
+    function showAllPhotos(reference) {
+        // Get the reference to the fb file folder given in function parameter
+        const fbPhotosFolder = firebase.storage().ref(reference)
+        let fbPhotosFolderRef = fbPhotosFolder.child(reference)
+        
+        let photoDisplayIndex = 0;
+
+        fbPhotosFolder.listAll()
+        .then((res) => {
+            // Grab url when an image is found in any of the folders that are being searched through
+            res.items.forEach(itemRef => {
+                // console.log(itemRef)
+                itemRef.getDownloadURL()
+                .then((url) => {
+                    displayAllPhotos(url, photoDisplayIndex)
+                    photoDisplayIndex++
+                })
+            })
+            // Look through each folder reference and if there is another folder inside, recusively call showAllPhotos until there are no more nested folders
+            res.prefixes.forEach(folderRef => {
+                showAllPhotos(folderRef.fullPath)
+            })
+        })
+    }
+    const displayAllPhotos = (url, index) => {
+        const column1 = document.querySelector('#all-photos-column-1')
+        const column2 = document.querySelector('#all-photos-column-2')
+
+        if (index % 2 == 0) {
+            column1.innerHTML += `
+                <img src="${url}" alt="" class="all-photos-image" style="width: 100%;" id="all-photos-img-${index}">
+            `
+        } else {
+            column2.innerHTML += `
+                <img src="${url}" alt="" class="all-photos-image" style="width: 100%;" id="all-photos-img-${index}">
+            `
+        }
+    }
+
+    showAllPhotos('photos')
+    photoGrid()
+}
 
 
 const main = () => {
@@ -344,12 +398,23 @@ const main = () => {
         changeHomeImages()
     })
 
+    // Prevent default operations for scrolling with arrows and spacebar 
+    window.addEventListener("keydown", function(e) {
+        if(["Space","ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].indexOf(e.code) > -1) {
+            e.preventDefault();
+        }
+    }, false);
+
     // Call necessary listening functions. 
     navSlide()
     changeHomeImages()
     collectionFunctions()
+    allPhotosFunctions()
 }
 main()
+
+
+
 
 
 
