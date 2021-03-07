@@ -279,6 +279,10 @@ html, body {
     vertical-align: middle;
 }
 
+.collection-image {
+    cursor: pointer;
+}
+
 
 
 /* Collections images carousel */

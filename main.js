@@ -262,9 +262,15 @@ const collectionFunctions = () => {
                 })
                 testArr.push(promise)
             })
+            // Once all photos load then add event listeners to all images for showing the individual image carousel
             Promise.all(testArr).then(() => {
-                let els = document.querySelectorAll('.collection-image')
-                console.log(els)
+                let collectionImages = document.querySelectorAll('.collection-image')
+                collectionImages.forEach(function(img) {
+                    img.addEventListener('click', function() {
+                        const currImgId = img.id
+                        showCollectionsImageCarousel(currImgId)
+                    })
+                })
             })
         })
 
@@ -274,20 +280,52 @@ const collectionFunctions = () => {
         })
 
         collectionsPhotoGrid()
-        // showCollectionsImageCarousel()
     }
 
-    function showCollectionsImageCarousel() {
-        // const collectionsCarouselBody = document.getElementById('collections-carousel-container')
-        console.log('hello there')
-        // console.log(collectionImages)
-        // Array.prototype.forEach.call(collectionImages, function(item) {
-        //     item.addEventListener('click', function() {
-        //         console.log('yo')
-        //     })
-        // })
-    }
+    function showCollectionsImageCarousel(imgId) {
+        // Grab first word of string to find collection from imgId and append '-img' to it
+        let currCollecitonClass = imgId.substr(0, imgId.indexOf('-')) + "-img"
+        let currCollectionsImgs = document.getElementsByClassName(currCollecitonClass)
 
+        let collectionCarousel = document.querySelector('#collections-carousel-controls .carousel-inner')
+        collectionCarousel.innerHTML = ''
+        for (let i = 0; i < currCollectionsImgs.length; i++) {
+            // Hold the current photo src link to firebase
+            let currImgURL = currCollectionsImgs[i].src
+            // If the current image matches the id of the image that was clicked, it will be given the active class, therefore seen first
+            if(currCollectionsImgs[i].id == imgId) {
+                collectionCarousel.innerHTML += `
+                    <div class="collections-carousel-item carousel-item active">
+                        <img src="${currImgURL}" class="d-block" alt="">
+                    </div>
+                `
+            } else {
+                collectionCarousel.innerHTML += `
+                    <div class="collections-carousel-item carousel-item">
+                        <img src="${currImgURL}" class="d-block" alt="">
+                    </div>
+                `
+            }
+        }
+
+        const collectionsCarouselContainer = document.getElementById('collections-carousel-container')
+        
+        collectionsCarouselContainer.classList.remove('d-none')
+
+
+        // Listen for exit carousel button click
+        $('#exit-collections-carousel-btn').on('click', function() {
+            collectionsCarouselContainer.classList.add('d-none')
+        })
+
+        // Listen for esc button press when collecitonsCarouselContainer is open
+        $(document).keyup(function(e) {
+            if (e.key === "Escape" && !collectionsCarouselContainer.classList.contains('d-none')) {
+                collectionsCarouselContainer.classList.add('d-none')
+            }
+        });
+       
+    }
 
     showCollectionsBtnPage()
 }
