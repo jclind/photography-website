@@ -435,6 +435,34 @@ const allPhotosFunctions = () => {
     photoGrid()
 }
 
+const aboutMeFunctions = () => {
+    // Gets necessary images for about me page from the firebase db
+    const showAboutImages = () => {
+        const card1 = document.getElementById('about-card1-img')
+        const card2 = document.getElementById('about-card2-img')
+        const card3 = document.getElementById('about-card3-img')
+
+        const aboutMePageRef = firebase.storage().ref('photos/thumbnails/about-me-images')
+        const card1Ref = aboutMePageRef.child('card1img.jpg')
+        const card2Ref = aboutMePageRef.child('card2img.jpg')
+        const card3Ref = aboutMePageRef.child('card3img.jpg')
+
+        card1Ref.getDownloadURL()
+        .then((url) => {
+            card1.src = url
+        })
+        card2Ref.getDownloadURL()
+        .then((url) => {
+            card2.src = url
+        })
+        card3Ref.getDownloadURL()
+        .then((url) => {
+            card3.src = url
+        })
+    }
+    showAboutImages()
+}
+
 
 const main = () => {
     // Control nav active links.
@@ -460,11 +488,13 @@ const main = () => {
     changeHomeImages()
     collectionFunctions()
     allPhotosFunctions()
+    aboutMeFunctions()
 }
 main()
 
 
 
 
-
+// Remove possible second scroll bar
+$('html').css('overflow-x', 'initial');
 

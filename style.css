@@ -312,12 +312,12 @@ html, body {
 
 .collections-carousel, .all-photos-carousel{
     background: rgb(17, 17, 17) !important;
-    height: 90%;
-    width: 90%;
+    height: 95%;
+    width: 95%;
 }
 .collections-carousel #collections-carousel-controls, .all-photos-carousel #all-photos-carousel-controls {
-    height: 90%;
-    width: 90%;
+    height: 100%;
+    width: 95%;
 }
 
 #collections-carousel-controls .carousel-inner .active, #all-photos-carousel-controls .carousel-inner .active {
@@ -329,10 +329,36 @@ html, body {
     background: rgb(17, 17, 17) !important;
     margin: 0 auto;
     width: auto;
-    height: 825px;
+    max-width: 95%;
     max-height: 825px;
 }
 
+@media screen and (max-width: 768px) {
+    .collections-carousel-item img, .all-photos-carousel-item img {
+        max-width: 100%;
+    }
+}
+
+
+
+
+
+/* About page */
+
+.about-title {
+    font-size: 50px;
+    font-weight: normal;
+}
+
+.about-card-text {
+    font-size: 22px;
+}
+
+@media screen and (max-width: 1200px) {
+    .about-card-text {
+        font-size: 18px;
+    }
+}
 
 
 

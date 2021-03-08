@@ -62,8 +62,8 @@
                 <div id="collections-carousel-container" class="collections-carousel-wrapper position-absolute d-flex d-none justify-content-center align-items-center">
                     <div id="exit-collections-carousel-btn">&#10005</div>
                     <div class="collections-carousel d-flex justify-content-center align-items-center">
-                        <div id="collections-carousel-controls" class="carousel slide overflow-hidden" data-ride="carousel" data-interval="false">
-                            <div class="carousel-inner">
+                        <div id="collections-carousel-controls" class="carousel slide overflow-hidden d-flex align-items-center" data-ride="carousel" data-interval="false">
+                            <div class="carousel-inner d-flex align-items-center">
                             </div>
                             <button class="collections-carousel-prev-btn carousel-control-prev" type="button" data-bs-target="#collections-carousel-controls" data-bs-slide="prev">
                                 <span class="carousel-control-prev-icon" id="collections-carousel-prev-icon" aria-hidden="true"></span>
@@ -78,7 +78,7 @@
                 </div>
                 
             </div>
-            <div class="tab-pane fade show active w-100 h-100 overflow-hidden" id="all" role="tabpanel" aria-labelledby="all-tab">
+            <div class="tab-pane fade w-100 h-100 overflow-hidden" id="all" role="tabpanel" aria-labelledby="all-tab">
                 <div class="mobile-header-logo text-center mt-1 d-none">
                     <div style="font-size: 25px">光</div>
                     <div style="font-size: 15px;">Jesse Lind</div>
@@ -96,8 +96,8 @@
                 <div id="all-photos-carousel-container" class="all-photos-carousel-wrapper position-absolute d-flex d-none justify-content-center align-items-center">
                     <div id="exit-all-photos-carousel-btn">&#10005</div>
                     <div class="all-photos-carousel d-flex justify-content-center align-items-center">
-                        <div id="all-photos-carousel-controls" class="carousel slide overflow-hidden" data-ride="carousel" data-interval="false">
-                            <div class="carousel-inner">
+                        <div id="all-photos-carousel-controls" class="carousel slide overflow-hidden d-flex align-items-center" data-ride="carousel" data-interval="false">
+                            <div class="carousel-inner d-flex align-items-center">
                             </div>
                             <button class="all-photos-carousel-prev-btn carousel-control-prev" type="button" data-bs-target="#all-photos-carousel-controls" data-bs-slide="prev">
                                 <span class="carousel-control-prev-icon" id="all-photos-carousel-prev-icon" aria-hidden="true"></span>
@@ -111,7 +111,47 @@
                     </div>
                 </div>
             </div>
-            <div class="tab-pane fade" id="about" role="tabpanel" aria-labelledby="about-tab">You</div>
+            <div class="tab-pane show active fade w-100 h-100 overflow-hidden" id="about" role="tabpanel" aria-labelledby="about-tab">
+                <div class="about-container container-fluid d-flex justify-content-center w-100 h-100 flex-column">
+                    <div class="about-title text-center my-3 mx-auto">About Me</div>
+                    <div class="mb-3 py-3" id="about-card1">
+                        <div class="row g-0">
+                            <div class="col-md-12 col-lg-6 text-center" style="max-width: 1100px;">
+                                <img class="img-fluid" id="about-card1-img" src="" alt="">
+                            </div>
+                            <div class="col-md-12 col-lg-6 d-flex justify-content-center align-items-center">
+                                <div class="card-body">
+                                    <div class="fw-normal about-card-text" id="about-card1-text">On January 2nd 2015 I picked up a dlsr camera that was handed down to me from my siblings which, up to that point, I had never actually taken a picture with. With that first picture I took, I began to feel an incredible passion for this new found hobby. With this first picture I started a two and a half year journey to take a photo every single day on the website <a href="https://tookapic.com/" class="link-dark">tookapic</a>.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3 pb-3" id="about-card2">
+                        <div class="row g-0 d-flex justify-content-center flex-row-reverse">
+                            <div class="col-md-12 col-lg-4 text-center" style="max-width: 1100px;">
+                                <img class="img-fluid" id="about-card2-img" src="" alt="">
+                            </div>
+                            <div class="col-md-12 col-lg-8 d-flex justify-content-center align-items-center">
+                                <div class="card-body">
+                                    <div class="fw-normal about-card-text" id="about-card2-text">Throughout my tookapic journey, I was surrounded by an incredible community of like minded ameature photographers who pushed me to be the best photographer I could be. Throughout my 777 concecutive days of photos, I learned more about photography than I could have ever imagined. I learned about photo composition, lighting, surroundings and how to just take a solid photograph. I also experimented with many different photography styles including studio, landscape, animals, and astronomy. And, although I have moved past my daily photography challenge, I will always make time to enjoy this incredible hobby. </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3 py-3" id="about-card3">
+                        <div class="row g-0">
+                            <div class="col-md-12 col-lg-6 text-center" style="max-width: 1100px;">
+                                <img class="img-fluid" id="about-card3-img" src="" alt="">
+                            </div>
+                            <div class="col-md-12 col-lg-6 d-flex justify-content-center align-items-center">
+                                <div class="card-body">
+                                    <div class="fw-normal about-card-text" id="about-card3-text">Photography will always be special to me because it changes the way you look at the world. Although it's true that photos of incredible landscapes or huge events are amazing and a big part of photography, I find that in most scenarios and in normal daily life, photography guides you to see the beautiy in the normal, everyday events, items, and people around you. And, in the end, daily beauty is what should hold the most joy and meaning in peoples lives. </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">Doing?</div>
         </div>
     </div>
