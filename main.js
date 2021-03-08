@@ -1,15 +1,3 @@
-
-
-// [{src: ..., tag}]
-let allPhotos = [{src: "https://tookapic.ams3.digitaloceanspaces.com/photos/2016/115/5/a/5a8bfc724ee22fb2a3bdfa5a028235f6.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=FCTSGY53G7RK6CW6I4PK%2F20210226%2Fams3%2Fs3%2Faws4_request&X-Amz-Date=20210226T174805Z&X-Amz-SignedHeaders=host&X-Amz-Expires=300&X-Amz-Signature=6ef46d19c2c640f9ea828af6f927cbc97ef5690a4f4acdb3b3d541264be2373d"}]
-
-
-
-
-
-
-
-
 const navSlide = () => {
     const burger = document.querySelector('.hamburger')
     const nav = document.querySelector('.side-navbar')
@@ -247,7 +235,7 @@ const collectionFunctions = () => {
         const storageRef = firebase.storage().ref('photos/collections/' + subject)
 
         storageRef.listAll().then(function(result) {
-            let testArr = []
+            let promises = []
             result.items.forEach(function(imageRef, index) {
                 let promise = imageRef.getDownloadURL().then((url) => {
                     if (index % 2 == 0) {
@@ -260,10 +248,10 @@ const collectionFunctions = () => {
                         `
                     }
                 })
-                testArr.push(promise)
+                promises.push(promise)
             })
             // Once all photos load then add event listeners to all images for showing the individual image carousel
-            Promise.all(testArr).then(() => {
+            Promise.all(promises).then(() => {
                 let collectionImages = document.querySelectorAll('.collection-image')
                 collectionImages.forEach(function(img) {
                     img.addEventListener('click', function() {
@@ -342,46 +330,108 @@ const collectionFunctions = () => {
 }
 
 const allPhotosFunctions = () => {
+    let photoDisplayIndex = 0;
+
     function showAllPhotos(reference) {
         // Get the reference to the fb file folder given in function parameter
-        const fbPhotosFolder = firebase.storage().ref(reference)
+        const fbPhotosFolder = firebase.storage().ref()
         let fbPhotosFolderRef = fbPhotosFolder.child(reference)
-        
-        let photoDisplayIndex = 0;
 
-        fbPhotosFolder.listAll()
-        .then((res) => {
+        fbPhotosFolderRef.listAll().then((res) => {
             // Grab url when an image is found in any of the folders that are being searched through
             res.items.forEach(itemRef => {
-                // console.log(itemRef)
-                itemRef.getDownloadURL()
-                .then((url) => {
+                itemRef.getDownloadURL().then((url) => {
                     displayAllPhotos(url, photoDisplayIndex)
                     photoDisplayIndex++
                 })
             })
+
             // Look through each folder reference and if there is another folder inside, recusively call showAllPhotos until there are no more nested folders
             res.prefixes.forEach(folderRef => {
                 showAllPhotos(folderRef.fullPath)
             })
         })
     }
+    
+    
     const displayAllPhotos = (url, index) => {
         const column1 = document.querySelector('#all-photos-column-1')
         const column2 = document.querySelector('#all-photos-column-2')
 
+        let imgId = `all-photos-img-${index}`
         if (index % 2 == 0) {
             column1.innerHTML += `
-                <img src="${url}" alt="" class="all-photos-image" style="width: 100%;" id="all-photos-img-${index}">
+                <img src="${url}" alt="" class="all-photos-image" style="width: 100%;" id="${imgId}">
             `
         } else {
             column2.innerHTML += `
-                <img src="${url}" alt="" class="all-photos-image" style="width: 100%;" id="all-photos-img-${index}">
+                <img src="${url}" alt="" class="all-photos-image" style="width: 100%;" id="${imgId}">
             `
         }
+        // Add EventListener to each image once they are loaded.
+        $('#' + imgId).on("load", function() {
+            document.getElementById(imgId).addEventListener('click', function() {
+                showAllPhotosImageCarousel(imgId)
+            })
+        })
     }
+    function showAllPhotosImageCarousel(imgId) {
 
-    showAllPhotos('photos')
+        let allPhotos = document.querySelectorAll('.all-photos-image')
+        
+        
+        let allPhotosCarousel = document.querySelector('#all-photos-carousel-controls .carousel-inner')
+        
+        let tempPhotosHTML = ''
+        document.body.style.cursor = 'wait'
+        for (let photo in allPhotos) {
+            // Hold the current photo src link to firebase
+            let currImgURL = allPhotos[photo].src
+            // If the current image matches the id of the image that was clicked, it will be given the active class, therefore seen first
+            if(allPhotos[photo].id == imgId) {
+                tempPhotosHTML += `
+                    <div class="collections-carousel-item carousel-item active">
+                        <img src="${currImgURL}" class="d-block" alt="">
+                    </div>
+                `
+            } else {
+                tempPhotosHTML += `
+                    <div class="collections-carousel-item carousel-item">
+                        <img src="${currImgURL}" class="d-block" alt="">
+                    </div>
+                `
+            }
+        }
+        allPhotosCarousel.innerHTML = tempPhotosHTML
+        document.body.style.cursor = 'default'
+        const allPhotosCarouselContainer = document.getElementById('all-photos-carousel-container')
+        allPhotosCarouselContainer.classList.remove('d-none')
+
+
+        // Listen for exit carousel button click
+        $('#exit-all-photos-carousel-btn').on('click', function() {
+            allPhotosCarouselContainer.classList.add('d-none')
+        })
+
+        // Listen for esc button press when allPhotosCarouselContainer is open
+        $(document).keyup(function(e) {
+            if (e.key === "Escape" && !allPhotosCarouselContainer.classList.contains('d-none')) {
+                allPhotosCarouselContainer.classList.add('d-none')
+            }
+        })
+        // Listen for arrow key presses when allPhotosCarouselContainer is open to switch between photos.
+        $(document).keyup(function(e) {
+            const prevPhotoBtn = document.getElementById('all-photos-carousel-prev-icon')
+            const nextPhotoBtn = document.getElementById('all-photos-carousel-next-icon')
+            if (e.key === "ArrowLeft" && !allPhotosCarouselContainer.classList.contains('d-none')) {
+                prevPhotoBtn.click()
+            }
+            if (e.key === "ArrowRight" && !allPhotosCarouselContainer.classList.contains('d-none')) {
+                nextPhotoBtn.click()
+            }
+        })
+    }
+    showAllPhotos('photos/collections')
     photoGrid()
 }
 

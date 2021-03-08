@@ -286,7 +286,7 @@ html, body {
 
 
 /* Collections images carousel */
-#exit-collections-carousel-btn {
+#exit-collections-carousel-btn, #exit-all-photos-carousel-btn{
     position: absolute;
     top: 0;
     right: 25px;
@@ -295,12 +295,12 @@ html, body {
     font-weight: lighter;
     cursor: pointer;
 }
-#exit-collections-carousel-btn:hover {
+#exit-collections-carousel-btn:hover, #exit-all-photos-carousel-btn:hover {
     color: white;
 }
 
 
-.collections-carousel-wrapper {
+.collections-carousel-wrapper, .all-photos-carousel-wrapper {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -310,22 +310,22 @@ html, body {
     z-index: 10;
 }
 
-.collections-carousel {
+.collections-carousel, .all-photos-carousel{
     background: rgb(17, 17, 17) !important;
     height: 90%;
     width: 90%;
 }
-.collections-carousel #collections-carousel-controls {
+.collections-carousel #collections-carousel-controls, .all-photos-carousel #all-photos-carousel-controls {
     height: 90%;
     width: 90%;
 }
 
-#collections-carousel-controls .carousel-inner .active {
+#collections-carousel-controls .carousel-inner .active, #all-photos-carousel-controls .carousel-inner .active {
     background: rgba(0, 0, 0, 0) !important;
 }
 
 
-.collections-carousel-item img {
+.collections-carousel-item img, .all-photos-carousel-item img {
     background: rgb(17, 17, 17) !important;
     margin: 0 auto;
     width: auto;
