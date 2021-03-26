@@ -421,9 +421,39 @@ html, body {
 }
 
 
-
-
-
+#contact-form {
+    width: 40%;
+    margin: 0 auto;
+}
+#contact-form label, #contact-form input,  #contact-form textarea {
+    display: block;
+}
+#contact-form input {
+    height: 45px;
+    width: 230px;
+    border-radius: 3px;
+    border: 1px solid rgb(165, 165, 165);
+    outline: none;
+    background: #fafafa;
+}
+#contact-form input:focus, #contact-form textarea:focus {
+    background: white;
+    border: 2px solid black !important;
+    box-shadow: none !important;
+}
+#contact-form textarea {
+    background: #fafafa;
+    border: 1px solid rgb(165, 165, 165);
+}
+#contact-form button {
+    width: 100px;
+}
+#contact-form button:active {
+    border: 1px solid white;
+}
+#contact-form button:focus {
+    box-shadow: none !important;
+}
 
 
 
