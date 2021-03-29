@@ -153,54 +153,75 @@
                 </div>
             </div>
             <div class="tab-pane show active fade w-100 h-100 overflow-hidden" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                <h1 class="overflow-hidden text-center mt-2 mb-4">Find Me On:</h1>
-                <div class="container ext-links">
+                <h1 class="overflow-hidden text-center mt-3 mb-md-4">Find Me On:</h1>
+                <div class="container ext-links mb-5">
                     <div class="row text-center justify-content-center">
-                        <div class="col-3 card mx-3" id="github-link">
+                        <div class="col-lg-3 col-md-4 col-10 ext-link-container card m-3" id="github-link">
                             <img src="https://firebasestorage.googleapis.com/v0/b/photography-website-e62a9.appspot.com/o/photos%2Fthumbnails%2Fexternal-links%2FEi-sc-github%20(1)%20(2)%20(1).jpg?alt=media&token=ae237110-ae76-4f40-a947-25476e9c894a" alt="" class="link-img" id="github-link-img">
-                            <p class="text-muted link-text my-4">Check out my github repository for more of my coding projects!</p>
+                            <p class="text-muted link-text my-4 px-2">Check out my github repository for more of my coding projects!</p>
                             <div class="link-btn-container">
-                                <button class="github-link-btn btn w-100 link-btn">Visit Github</button>
+                                <a class="github-link-btn btn w-100 link-btn" target="_blank" rel="noopener noreferrer" href="https://github.com/jclind">Visit Github</a>
                             </div>
                         </div>
-                        <div class="col-3 card mx-3" id="instagram-link">
+                        <div class="col-lg-3 col-md-4 col-10 ext-link-container card m-3" id="instagram-link">
                             <img src="https://firebasestorage.googleapis.com/v0/b/photography-website-e62a9.appspot.com/o/photos%2Fthumbnails%2Fexternal-links%2Ficonfinder_instagram_1783362%20(1).jpg?alt=media&token=fc5c419d-b329-4156-b191-56eda51715ca" alt="" class="link-img" id="instagram-link-img">
-                            <p class="text-muted link-text my-4">For more of my photography and personal pictures, visit my instagram page!</p>
+                            <p class="text-muted link-text my-4 px-2">For more of my photography and personal pictures, visit my instagram page!</p>
+                            <div class="link-btn-container">
+                                <a class="instagram-link-btn btn w-100 link-btn" target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/jclind02/">Visit Instagram</a>
+                            </div>
                         </div>
-                        <div class="col-3 card mx-3" id="linkedin-link">
+                        <div class="col-lg-3 col-md-4 col-10 ext-link-container card m-3" id="linkedin-link">
                             <img src="https://firebasestorage.googleapis.com/v0/b/photography-website-e62a9.appspot.com/o/photos%2Fthumbnails%2Fexternal-links%2Ficonfinder_linkedin_circle_color_107178.jpg?alt=media&token=92a1ae32-64a7-4088-b4db-f66c26e1c191" alt="" class="link-img" id="linkedin-link-img">
-                            <p class="text-muted link-text my-4">Wanna know more about my projects and career goals? Check out my linkin!</p>
+                            <p class="text-muted link-text my-4 px-2">Wanna know more about my projects and career goals? Check out my linkin!</p>
+                            <div class="link-btn-container">
+                                <a class="linkedin-link-btn btn w-100 link-btn" target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/jesseclind/">Visit Linkedin</a>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <h1 class="overflow-hidden text-center m-4">Or Contact Me:</h1>
-                <form class="justify-content-center" action="https://formspree.io/f/jesseclind@gmail.com" method="post" id="contact-form">
-                    <div class="form-names d-flex justify-content-between my-3">
-                        <label class="me-2">
-                            First Name *
-                            <input type="name" name="first-name" class="first-name"/>
+                <form class="justify-content-center container mb-5" action="https://formspree.io/f/jesseclind@gmail.com" method="post" id="contact-form">
+                    <div class="row justify-content-around">
+                        <label class="my-3 col-lg-6 p-0">
+                            <div class="position-relative me-lg-2">
+                                First Name *
+                                <input type="name" name="first-name" class="first-name"/>
+                                <span class="input-border w-100"></span>
+                            </div>
                         </label>
-                        <label class="ms-2">
-                            Last Name *
-                            <input type="name" name="last-name" class="last-name"/>
+                        <label class="my-3 col-lg-6 p-0">
+                            <div class="position-relative ms-lg-2">
+                                Last Name *
+                                <input type="name" name="last-name" class="last-name"/>
+                                <span class="input-border"></span>
+                            </div>
                         </label>
                     </div>
-                    <label class="my-3">
-                        Email *
-                        <input type="email" name="email" class="email w-100"/>
-                    </label>
-                    <label class="my-3">
-                        Subject *
-                        <input type="text" name="subject" class="subject w-100"/>
-                    </label>
-                    <label class="my-3">
-                        Message *
-                        <textarea name="message" class="form-control message w-100" rows="3"></textarea>
-                    </label>
-                    <div class="status">
-
+                    <div class="row">
+                        <label class="my-3 col-12 p-0">
+                            Email *
+                            <input type="email" name="email" class="email"/>
+                            <span class="input-border"></span>
+                        </label>
                     </div>
-                    <button type="submit" class="btn btn-dark submit">Send</button>
+                    <div class="row">
+                        <label class="my-3 col-12 p-0">
+                            Subject *
+                            <input type="text" name="subject" class="subject" autocomplete="off"/>
+                            <span class="input-border"></span>
+                        </label>
+                    </div>
+                    <div class="row">
+                        <label class="my-3 col-12 p-0">
+                            Message *
+                            <textarea name="message" class="form-control message w-100 shadow-none" rows="5"></textarea>
+                            <span class="input-border"></span>
+                        </label>
+                        <div class="status">
+    
+                        </div>
+                        <button type="submit" class="btn btn-dark submit d-lg-flex mx-auto mx-lg-0 my-2">Send</button>
+                    </div>
                 </form>
             </div>
         </div>

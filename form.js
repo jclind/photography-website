@@ -31,51 +31,69 @@ $(document).ready(function () {
         $('#contact-form textarea').css("border", "1px solid rgb(165, 165, 165)")
         
         // Validate first name input
-        if (firstName.length < 1) {
+        if (firstName.length < 1 || firstName.length > 40) {
             // Change first name input's border color to red
+            $('.first-name').siblings('.input-border').css("border", "1px solid red")
+
+            // Remove red border on focus of current input
+            $('.first-name').on('focus', function() {
+                $(this).siblings('.input-border').css("border", "1px solid rgb(233, 233, 233)")
+            })
+
+            // Change placeholder text based on wrongly inputed value
             $('.first-name').val('')
-            $('.first-name').css("border", "1px solid red")
-            $('.first-name').attr("placeholder", "Please enter first name")
-            event.preventDefault()
-        } else if (firstName.length > 40) {
-            $('.first-name').val('')
-            $('.first-name').css("border", "1px solid red")
-            $('.first-name').attr("placeholder", "First name too long")
+            if (firstName.length < 1) {
+                $('.first-name').attr("placeholder", "Please enter first name")
+            } else {
+                $('.first-name').attr("placeholder", "First name too long")
+            }
             event.preventDefault()
         }
 
         // Validate last name input
-        if (lastName.length < 1) {
+        if (lastName.length < 1 || lastName.length > 40) {
             // Change first name input's border color to red
+            $('.last-name').siblings('.input-border').css("border", "1px solid red")
+
+            // Remove red border on focus of current input
+            $('.last-name').on('focus', function() {
+                $(this).siblings('.input-border').css("border", "1px solid rgb(233, 233, 233)")
+            })
+            // Change placeholder text based on wrongly inputed value
             $('.last-name').val('')
-            $('.last-name').css("border", "1px solid red")
-            $('.last-name').attr("placeholder", "Please enter last name")
-            event.preventDefault()
-        } else if (lastName.length > 40) {
-            $('.last-name').val('')
-            $('.last-name').css("border", "1px solid red")
-            $('.last-name').attr("placeholder", "Last name too long")
+            if (lastName.length < 1) {
+                $('.last-name').attr("placeholder", "Please enter last name")
+            } else {
+                $('.last-name').attr("placeholder", "Last name too long")
+            }
             event.preventDefault()
         }
 
         // Validate email input
         if (email.length <= 5 && !email.includes('@') && !email.includes('.')) {
+            $('.email').siblings('.input-border').css("border", "1px solid red")
+            // Remove red border on focus of current input
+            $('.email').on('focus', function() {
+                $(this).siblings('.input-border').css("border", "1px solid rgb(233, 233, 233)")
+            })
             $('.email').val('')
-            $('.email').css("border", "1px solid red")
             $('.email').attr("placeholder", "Email invalid (Make sure to have '@' and '.')")
             event.preventDefault()
         }
         
         // Validate subject input
-        if (subject.length < 2) {
+        if (subject.length < 2 || subject.length > 100) {
+            $('.subject').siblings('.input-border').css("border", "1px solid red")
+            $('.subject').on('focus', function() {
+                $(this).siblings('.input-border').css("border", "1px solid rgb(233, 233, 233)")
+            })
+            // Change placeholder text based on wrongly inputed value
             $('.subject').val('')
-            $('.subject').css("border", "1px solid red")
-            $('.subject').attr("placeholder", "Please enter a subject greater than 1 character")
-            event.preventDefault()
-        } else if (subject.length > 100) {
-            $('.subject').val('')
-            $('.subject').css("border", "1px solid red")
-            $('.subject').attr("placeholder", "Please enter a subject less than 100 characters")
+            if (subject.length < 2) {
+                $('.subject').attr("placeholder", "Please enter a subject greater than 1 character")
+            } else {
+                $('.subject').attr("placeholder", "Please enter a subject less than 100 characters")
+            }
             event.preventDefault()
         }
 
@@ -83,7 +101,10 @@ $(document).ready(function () {
         // Validate message input
         if (message.length < 10) {
             $('#contact-form textarea').val('')
-            $('#contact-form textarea').css("border", "1px solid red")
+            $('#contact-form textarea').siblings('.input-border').css("border", "1px solid red")
+            $('#contact-form textarea').on('focus', function() {
+                $(this).siblings('.input-border').css("border", "1px solid rgb(233, 233, 233)")
+            })
             $('#contact-form textarea').attr("placeholder", "Please enter a message greater than 9 characters")
             event.preventDefault()
         }

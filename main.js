@@ -301,9 +301,11 @@ const collectionFunctions = () => {
             const nextPhotoBtn = document.getElementById('collections-carousel-next-icon')
             if (e.key === "ArrowLeft" && !collectionsCarouselContainer.classList.contains('d-none')) {
                 prevPhotoBtn.click()
+                console.log('this should have worked arrow')
             }
             if (e.key === "ArrowRight" && !collectionsCarouselContainer.classList.contains('d-none')) {
                 nextPhotoBtn.click()
+                console.log('this should have worked arrow')
             }
         })
        
@@ -487,7 +489,7 @@ const main = () => {
 
     // Prevent default operations for scrolling with arrows and spacebar 
     window.addEventListener("keydown", function(e) {
-        if(["Space","ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].indexOf(e.code) > -1) {
+        if(["Space","ArrowUp","ArrowDown"].indexOf(e.code) > -1) {
             e.preventDefault()
         }
     }, false)

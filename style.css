@@ -426,7 +426,7 @@ html, body {
 .ext-links .row {
     padding: 0;
 }
-.ext-links .row .col-3 {
+.ext-link-container {
     position: relative;
     height: 250px;
     padding: 0;
@@ -435,17 +435,59 @@ html, body {
 #github-link {
     border-bottom: 3px solid #ffc0cb !important;
 }
-
+.github-link-btn::before {
+    background: #ffc0cb;
+}
 #instagram-link {
-    border-bottom: 3px solid #b19cd9;
+    border-bottom: 3px solid #b19cd9 !important;
 }
-
-
+.instagram-link-btn::before {
+    background: #b19cd9;
+}
 #linkedin-link {
-    border-bottom: 3px solid #abd7eb;
+    border-bottom: 3px solid #abd7eb !important;
 }
 
+.linkedin-link-btn::before {
+    background: #abd7eb;
+}
 
+@media screen and (max-width: 768px) {
+    #github-link {
+        border: 1px solid #ffc0cb;
+    }
+    #instagram-link {
+        border: 1px solid #b19cd9;
+    }
+    #linkedin-link {
+        border: 1px solid #abd7eb;
+    }
+    .link-btn::before {
+        transform: scaleY(1);
+    }
+    .ext-link-container .link-btn {
+        color: white;
+    }
+}
+@media screen and (min-width: 769px) {
+    #github-link:hover, #github-link:focus {
+        border: 1px solid #ffc0cb;
+    }
+    #instagram-link:hover, #instagram-link:focus {
+        border: 1px solid #b19cd9;
+    }
+    #linkedin-link:hover, #linkedin-link:focus {
+        border: 1px solid #abd7eb;
+    }
+    .ext-link-container:hover .link-btn, .ext-link-container:focus .link-btn {
+        color: white;
+    }
+    .link-btn::before {
+        transition: transform 400ms ease-in-out;
+        transform: scaleY(0);
+        transform-origin: bottom;
+    }
+}
 
 .link-img {
     border-radius: 50%;
@@ -458,6 +500,7 @@ html, body {
     font-size: 15px;
 }
 .link-btn {
+    line-height: 2;
     position: relative;
     bottom: 0;
     width: 100%;
@@ -467,11 +510,7 @@ html, body {
     z-index: 1;
     font-weight: bold;
     font-size: 20px;
-    color: rgb(141, 141, 141);
-}
-.link-btn:hover, .link-btn:focus {
-    color: white;
-    
+    color: rgb(206, 206, 206);
 }
 
 .link-btn::before {
@@ -482,13 +521,8 @@ html, body {
     right: 0;
     bottom: 0;
     z-index: -1;
-    background: #ffc0cb;
-
-    transition: transform 400ms ease-in-out;
-    transform: scaleY(0);
-    transform-origin: bottom;
 }
-.link-btn:hover::before, .link-btn:focus::before {
+.ext-link-container:hover .link-btn::before, .ext-link-container:focus .link-btn::before {
     transform: scaleY(1)
 }
 
@@ -500,30 +534,97 @@ html, body {
 }
 
 
+
+
+
+
 #contact-form {
-    width: 40%;
+    width: 50%;
     margin: 0 auto;
+}
+@media screen and (max-width: 768px) {
+    #contact-form {
+        width: 80%;
+    }
 }
 #contact-form label, #contact-form input,  #contact-form textarea {
     display: block;
 }
+#contact-form label {
+    position: relative;
+    color:rgb(104, 104, 104)
+}
+#contact-form textarea, #contact-form input {
+    border-radius: 3px;
+    background: #fafafa;
+    outline: none;
+    border: none !important;
+    box-shadow: none !important;
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
 #contact-form input {
     height: 45px;
-    width: 230px;
+    width: 100%;
+    padding: 14px;
+}
+
+#contact-form .input-border {
+    width: 100%;
+    height: calc(100% - 24px);
+    position: absolute;
+    left: 0;
+    top: 24px;
+    border: 1px solid rgb(233, 233, 233);
     border-radius: 3px;
-    border: 1px solid rgb(165, 165, 165);
-    outline: none;
-    background: #fafafa;
+    pointer-events: none;
 }
-#contact-form input:focus, #contact-form textarea:focus {
-    background: white;
-    border: 2px solid black !important;
-    box-shadow: none !important;
+
+#contact-form .input-border::before, #contact-form .input-border::after {
+    content: '';
+    display: inline-block;
+    width: 0;
+    height: 0;
+    position: absolute;
+    border-radius: 3px;
 }
-#contact-form textarea {
-    background: #fafafa;
-    border: 1px solid rgb(165, 165, 165);
+#contact-form .input-border::before {
+    left: 0;
+    bottom: 0;
+    border-bottom: 0px solid #222222;
+    border-right: 0px solid #222222;
 }
+#contact-form .input-border::after {
+    right: 0;
+    top: 0;
+    border-top: 0px solid #222222;
+    border-left: 0px solid #222222;
+}
+
+#contact-form input:focus  ~ .input-border:before, 
+#contact-form input:focus  ~ .input-border:after,
+#contact-form textarea:focus ~ .input-border:before,
+#contact-form textarea:focus ~ .input-border:after {
+    width: 100%;
+    height: 100%;
+    border-width: 2px;
+}
+#contact-form input:focus ~ .input-border:before,
+#contact-form textarea:focus ~ .input-border:before {
+    transition: 
+    width 0.2s ease,
+    height 0.1s ease 0.2s;
+}
+#contact-form input:focus ~ .input-border:after,
+#contact-form textarea:focus ~ .input-border:after {
+    transition:
+    border-width 0s ease 0.3s,
+    width 0.2s ease 0.3s,
+    height 0.1s ease 0.5s;
+}
+
 #contact-form button {
     width: 100px;
 }
@@ -533,7 +634,6 @@ html, body {
 #contact-form button:focus {
     box-shadow: none !important;
 }
-
 
 
 
