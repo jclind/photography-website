@@ -77,7 +77,7 @@ $(document).ready(function () {
                 $(this).siblings('.input-border').css("border", "1px solid rgb(233, 233, 233)")
             })
             $('.email').val('')
-            $('.email').attr("placeholder", "Email invalid (Make sure to have '@' and '.')")
+            $('.email').attr("placeholder", "Email invalid (add '@' or '.')")
             event.preventDefault()
         }
         
@@ -90,9 +90,9 @@ $(document).ready(function () {
             // Change placeholder text based on wrongly inputed value
             $('.subject').val('')
             if (subject.length < 2) {
-                $('.subject').attr("placeholder", "Please enter a subject greater than 1 character")
+                $('.subject').attr("placeholder", "Enter more than 1 character")
             } else {
-                $('.subject').attr("placeholder", "Please enter a subject less than 100 characters")
+                $('.subject').attr("placeholder", "Enter less than 100 characters")
             }
             event.preventDefault()
         }
@@ -105,7 +105,7 @@ $(document).ready(function () {
             $('#contact-form textarea').on('focus', function() {
                 $(this).siblings('.input-border').css("border", "1px solid rgb(233, 233, 233)")
             })
-            $('#contact-form textarea').attr("placeholder", "Please enter a message greater than 9 characters")
+            $('#contact-form textarea').attr("placeholder", "Enter a message greater than 9 characters")
             event.preventDefault()
         }
     }) 
