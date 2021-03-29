@@ -420,6 +420,85 @@ html, body {
     100% { height: 0%;}
 }
 
+.ext-links {
+    padding: 0;
+}
+.ext-links .row {
+    padding: 0;
+}
+.ext-links .row .col-3 {
+    position: relative;
+    height: 250px;
+    padding: 0;
+}
+
+#github-link {
+    border-bottom: 3px solid #ffc0cb !important;
+}
+
+#instagram-link {
+    border-bottom: 3px solid #b19cd9;
+}
+
+
+#linkedin-link {
+    border-bottom: 3px solid #abd7eb;
+}
+
+
+
+.link-img {
+    border-radius: 50%;
+    width: 70px;
+    margin: 10px auto 5px auto;
+}
+
+.ext-links .link-text {
+    font-weight: normal !important;
+    font-size: 15px;
+}
+.link-btn {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    border: none !important;
+    border-radius: 0;
+    z-index: 1;
+    font-weight: bold;
+    font-size: 20px;
+    color: rgb(141, 141, 141);
+}
+.link-btn:hover, .link-btn:focus {
+    color: white;
+    
+}
+
+.link-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    background: #ffc0cb;
+
+    transition: transform 400ms ease-in-out;
+    transform: scaleY(0);
+    transform-origin: bottom;
+}
+.link-btn:hover::before, .link-btn:focus::before {
+    transform: scaleY(1)
+}
+
+.ext-links .link-btn-container {
+    position: absolute;
+    bottom: 0;
+    height: 55px;
+    width: 100%;
+}
+
 
 #contact-form {
     width: 40%;
@@ -454,7 +533,6 @@ html, body {
 #contact-form button:focus {
     box-shadow: none !important;
 }
-
 
 
 
