@@ -25,7 +25,7 @@ const navSlide = () => {
                 if (link.style.animation) {
                     link.style.animation = '';
                 } else {
-                    link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`
+                    link.style.animation = `navLinkFade 0.6s ease forwards ${index / 7 + 0.1}s`
                 }
             })
             // Burger animation
@@ -203,7 +203,7 @@ const collectionFunctions = () => {
                 <div class="collections-album-title text-center my-3 mx-auto">${title}</div>
             </div>
             <div class="photo-container">
-                <div class="row">
+                <div class="row mb-5 pb-5">
                     <div class="column" id="collections-column-1"> 
                     </div>
                     <div class="column" id="collections-column-2">
@@ -481,11 +481,18 @@ const main = () => {
     $('#navLinks button').on('click', function (e) {
         e.preventDefault()
         $(this).tab('show')
+        
+        // Scroll to top of page on each nav-button click
+        window.scrollTo(0, 0)
     })
 
     // Call changeHomeImages function on window resize.
+    let windowWidth = $(window).width()
     $(window).resize(() => {
-        changeHomeImages()
+        if (windowWidth !== $(window).width()) {
+            changeHomeImages()
+            windowWidth = $(window).width()
+        }
     })
 
     // Prevent default operations for scrolling with arrows and spacebar 
@@ -526,4 +533,9 @@ window.addEventListener( "pageshow", function ( event ) {
       // Handle page restore.
       window.location.reload();
     }
-  });
+});
+
+// Safari is annoying :(
+document.ontouchmove = function(event){
+    event.preventDefault();
+}
