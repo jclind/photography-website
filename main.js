@@ -1,7 +1,6 @@
 let allPhotos = [];
 
 
-
 const navSlide = () => {
     const burger = document.querySelector('.hamburger')
     const nav = document.querySelector('.side-navbar')
@@ -100,11 +99,11 @@ const changeHomeImages = () => {
         `
     } else {
         homeImages.innerHTML = `
-            <div class="home-title text-center my-sm-5 my-xxl-4">
+            <div class="home-title text-center my-sm-3 my-xxl-4">
                 <span style="font-size: 40px; font-weight: 500;">Jesse Lind</span><br>
                 <span class="text-muted sh" style="font-size: 25px; font-weight: 500;">Photography</span>
             </div>
-            <div class="carousel-container m-auto col-sm-12 col-md-10 col-xxl-7">
+            <div class="carousel-container m-auto col-sm-12 col-md-8 col-xxl-7">
                 <div id="home-carousel" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
@@ -450,6 +449,10 @@ function managePhotoData() {
                         // Once count === 0, all photo promises will be resolved and we can add the photos to localstorage
                         if(count === 0 && callback) {
                             saveLocalStorage(photos)
+                            // If the all photos tab is active, refresh once all photos are loaded into localstorage
+                            if ($('#all').hasClass('active')) {
+                                allPhotosFunctions()
+                            }
                             console.log(photos)
                         }
                     }
@@ -471,42 +474,53 @@ function managePhotoData() {
 
 
 const main = () => {
-    if (localStorage.length == 0) {
-        managePhotoData()
+    if (navigator.userAgent.indexOf("MSIE ") !== -1){
+        console.log('Internet Explorer')
+        const documentBody = document.querySelector('body')
+        documentBody.innerHTML = `
+            <div>Imagine using Internet Explorer<div>
+            <a href="https://www.google.com/chrome/">https://www.google.com/chrome/</a>
+        `
     } else {
-        allPhotos = JSON.parse(localStorage.getItem('photos'))
-    }
+        console.log('hello?')
 
-    // Control nav active links.
-    $('#navLinks button').on('click', function (e) {
-        e.preventDefault()
-        $(this).tab('show')
-        
-        // Scroll to top of page on each nav-button click
-        window.scrollTo(0, 0)
-    })
-
-    // Call changeHomeImages function on window resize.
-    let windowWidth = $(window).width()
-    $(window).resize(() => {
-        if (windowWidth !== $(window).width()) {
-            changeHomeImages()
-            windowWidth = $(window).width()
+        if (localStorage.length == 0) {
+            managePhotoData()
+        } else {
+            allPhotos = JSON.parse(localStorage.getItem('photos'))
         }
-    })
 
-    // Prevent default operations for scrolling with arrows and spacebar 
-    window.addEventListener("keydown", function(e) {
-        if(["Space","ArrowUp","ArrowDown"].indexOf(e.code) > -1) {
+        // Control nav active links.
+        $('#navLinks button').on('click', function (e) {
             e.preventDefault()
-        }
-    }, false)
+            $(this).tab('show')
+            
+            // Scroll to top of page on each nav-button click
+            window.scrollTo(0, 0)
+        })
 
-    // Call necessary listening functions. 
-    navSlide()
-    changeHomeImages()
-    collectionFunctions()
-    document.getElementById('all-tab').addEventListener('click', allPhotosFunctions)
+        // Call changeHomeImages function on window resize.
+        let windowWidth = $(window).width()
+        $(window).resize(() => {
+            if (windowWidth !== $(window).width()) {
+                changeHomeImages()
+                windowWidth = $(window).width()
+            }
+        })
+
+        // Prevent default operations for scrolling with arrows and spacebar 
+        window.addEventListener("keydown", function(e) {
+            if(["Space","ArrowUp","ArrowDown"].indexOf(e.code) > -1) {
+                e.preventDefault()
+            }
+        }, false)
+
+        // Call necessary listening functions. 
+        navSlide()
+        changeHomeImages()
+        collectionFunctions()
+        document.getElementById('all-tab').addEventListener('click', allPhotosFunctions)
+    }
 }
 
 main()
@@ -539,3 +553,5 @@ window.addEventListener( "pageshow", function ( event ) {
 document.ontouchmove = function(event){
     event.preventDefault();
 }
+
+

@@ -309,6 +309,7 @@ html, body {
     font-size: 35px;
     font-weight: lighter;
     cursor: pointer;
+    z-index: 20;
 }
 #exit-collections-carousel-btn:hover, #exit-all-photos-carousel-btn:hover {
     color: white;
@@ -590,7 +591,7 @@ html, body {
 }
 #contact-form textarea, #contact-form input {
     border-radius: 3px;
-    background: #fafafa;
+    background: #e7e7e7;
     outline: none;
     border: none !important;
     box-shadow: none !important;
