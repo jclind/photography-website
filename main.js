@@ -412,6 +412,14 @@ const allPhotosFunctions = () => {
     photoGrid()
 }
 
+const aboutMeFunctions = () => {
+    const contactBtn = document.querySelector('#about-page-contact-btn')
+    const contactTabBtn = document.querySelector('#contact-tab')
+    contactBtn.addEventListener('click', function() {
+        contactTabBtn.click();
+    })
+}
+
 
 function managePhotoData() {
     let photos = []
@@ -495,8 +503,9 @@ const main = () => {
             e.preventDefault()
             $(this).tab('show')
             
+            console.log(this)
             // Scroll to top of page on each nav-button click
-            window.scrollTo(0, 0)
+            document.querySelector('body').scrollTo(0, 0)
         })
 
         // Call changeHomeImages function on window resize.
@@ -520,6 +529,7 @@ const main = () => {
         changeHomeImages()
         collectionFunctions()
         document.getElementById('all-tab').addEventListener('click', allPhotosFunctions)
+        aboutMeFunctions()
     }
 }
 
