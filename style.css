@@ -27,6 +27,9 @@ html, body {
 .nav-logo-name {
     display: block;
 }
+.nav-logo-name .nav-logo {
+    cursor: default;
+}
 
 
 .home-page .title {
@@ -324,11 +327,14 @@ html, body {
     background: rgba(0, 0, 0, 0) !important;
 }
 
-
+.collections-carousel-item, .all-photos-carousel-item {
+    height: 100%;
+}
 .collections-carousel-item img, .all-photos-carousel-item img {
     background: rgb(17, 17, 17) !important;
     margin: 0 auto;
     width: auto;
+    height: auto;
     max-width: 95%;
     max-height: 825px;
 }

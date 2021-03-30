@@ -215,35 +215,34 @@ const collectionFunctions = () => {
         // Initialize reference to photo columns and photo refs.
         const column1 = document.querySelector('#collections-column-1')
         const column2 = document.querySelector('#collections-column-2')
-        const storageRef = firebase.storage().ref('photos/collections/' + subject)
 
-        storageRef.listAll().then(function(result) {
-            let promises = []
-            result.items.forEach(function(imageRef, index) {
-                let promise = imageRef.getDownloadURL().then((url) => {
-                    if (index % 2 == 0) {
-                        column1.innerHTML += `
-                            <img src="${url}" alt="" class="collection-image ${subject}-img" style="width: 100%;" id="${subject}-img-${index}" loading="lazy">
-                        `
-                    } else {
-                        column2.innerHTML += `
-                            <img src="${url}" alt="" class="collection-image ${subject}-img" style="width: 100%;" id="${subject}-img-${index}" loading="lazy">
-                        `
-                    }
-                })
-                promises.push(promise) 
-            })
-            // Once all photos load then add event listeners to all images for showing the individual image carousel
-            Promise.all(promises).then(() => {
-                let collectionImages = document.querySelectorAll('.collection-image')
-                collectionImages.forEach(function(img) {
-                    img.addEventListener('click', function() {
-                        const currImgId = img.id
-                        showCollectionsImageCarousel(currImgId)
+        let column1Height = 0
+        let column2Height = 0
+
+        for (let photo in allPhotos) {
+            if (allPhotos[photo].collection === subject) {
+                let imgId = `${subject}-img-${photo}`
+                // If the first column is shorter than the second column then the first column will get the next image appended to it
+                if (column1Height <= column2Height) {
+                    column1.innerHTML += `
+                    <img src="${allPhotos[photo].url}" alt="" class="${subject}-image" style="width: 100%; cursor: pointer;" id="${imgId}">
+                    `
+                    // Add the current img ratio to column1Height so that both columns will have the closest length.
+                    column1Height += allPhotos[photo].imgRatio
+                } else {
+                    column2.innerHTML += `
+                    <img src="${allPhotos[photo].url}" alt="" class="${subject}-image" style="width: 100%; cursor: pointer;" id="${imgId}">
+                    `
+                    column2Height += allPhotos[photo].imgRatio
+                }
+                // Add EventListeners to each image once they are loaded
+                $('#' + imgId).on("load", function() {
+                    document.getElementById(imgId).addEventListener('click', function() {
+                        showCollectionsImageCarousel(allPhotos[photo].url, subject)
                     })
                 })
-            })
-        })
+            }
+        }
 
         // Control back to collections page button
         document.getElementById('return-to-collections-btns').addEventListener('click', () => {
@@ -253,36 +252,41 @@ const collectionFunctions = () => {
         photoGrid()
     }
 
-    function showCollectionsImageCarousel(imgId) {
-        // Grab first word of string to find collection from imgId and append '-img' to it
-        let currCollecitonClass = imgId.substr(0, imgId.indexOf('-')) + "-img"
-        let currCollectionsImgs = document.getElementsByClassName(currCollecitonClass)
-
-        let collectionCarousel = document.querySelector('#collections-carousel-controls .carousel-inner')
-        collectionCarousel.innerHTML = ''
-        for (let i = 0; i < currCollectionsImgs.length; i++) {
-            // Hold the current photo src link to firebase
-            let currImgURL = currCollectionsImgs[i].src
-            // If the current image matches the id of the image that was clicked, it will be given the active class, therefore seen first
-            if(currCollectionsImgs[i].id == imgId) {
-                collectionCarousel.innerHTML += `
-                    <div class="collections-carousel-item carousel-item active">
-                        <img src="${currImgURL}" class="d-block" alt="">
-                    </div>
-                `
-            } else {
-                collectionCarousel.innerHTML += `
-                    <div class="collections-carousel-item carousel-item">
-                        <img src="${currImgURL}" class="d-block" alt="">
-                    </div>
-                `
-            }
-        }
-
+    function showCollectionsImageCarousel(imgURL, subject) {
         const collectionsCarouselContainer = document.getElementById('collections-carousel-container')
-        
         collectionsCarouselContainer.classList.remove('d-none')
 
+
+        let currCarousel = document.querySelector('#collections-carousel-controls .carousel-inner')
+
+        let tempPhotosHTML = ''
+        document.body.style.cursor = 'wait'
+        for (let photo in allPhotos) {
+            if (allPhotos[photo].collection === subject) {
+                const currPhotoURL = allPhotos[photo].url
+                // If the current image matches the id of the image that was clicked, it will be given the active class, therefore seen first
+                if(imgURL === currPhotoURL) {
+                    tempPhotosHTML += `
+                    <div class="collections-carousel-item carousel-item active">
+                    <img src="${currPhotoURL}" class="d-block" alt="">
+                    </div>
+                    `
+                } else {
+                    tempPhotosHTML += `
+                    <div class="collections-carousel-item carousel-item">
+                    <img src="${currPhotoURL}" class="d-block" alt="">
+                    </div> 
+                    `
+                }
+            }
+        }
+        // Push all image urls to the carousel html
+        currCarousel.innerHTML = tempPhotosHTML
+        document.body.style.cursor = 'default'
+
+        $('#collections-carousel-container').carousel({
+            interval: false,
+        });
 
         // Listen for exit carousel button click
         $('#exit-collections-carousel-btn').on('click', function() {
@@ -323,7 +327,6 @@ const allPhotosFunctions = () => {
         if (column1.innerHTML.trim().length == 0 && column2.innerHTML.trim().length == 0) {
             let column1Height = 0
             let column2Height = 0
-        
             for (let photo in allPhotos) {
                 let imgId = `all-photos-img-${photo}`
                 // If the first column is shorter than the second column then the first column will get the next image appended to it
@@ -339,7 +342,7 @@ const allPhotosFunctions = () => {
                     `
                     column2Height += allPhotos[photo].imgRatio
                 }
-                // Add EventListener to each image once they are loaded.
+                // Add EventListeners to each image once they are loaded.
                 $('#' + imgId).on("load", function() {
                     document.getElementById(imgId).addEventListener('click', function() {
                         showAllPhotosImageCarousel(allPhotos[photo].url)
@@ -380,8 +383,6 @@ const allPhotosFunctions = () => {
         // Push all image urls to the carousel html
         allPhotosCarousel.innerHTML = tempPhotosHTML
         document.body.style.cursor = 'default'
-
-
 
 
         // Listen for exit carousel button click
